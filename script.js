@@ -13,6 +13,7 @@ var searchInput = document.querySelector('#search-input');
 var todayContainer = document.querySelector('#today');
 var forecastContainer = document.querySelector('#forecast');
 var searchHistoryContainer = document.querySelector('#history');
+var searchButton = document.querySelector('#search-button');
 
 // Fetches weather data for given location from the Weather Geolocation
 // endpoint; then, calls functions to display current and forecast weather data.
@@ -21,6 +22,18 @@ var searchHistoryContainer = document.querySelector('#history');
 //	lon: arsfe
 //}
 // Add timezone plugins to day.js
+
+function fetchCity () {
+
+var location = document.querySelector('#search-input');
+
+fetch (`https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=03400c1c79db67ee1e82364afcc14bc5`)
+.then(response => response.json())
+.then(data => console.log(data))
+
+}
+
+
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
@@ -134,4 +147,14 @@ fetchWeather({
 	lat: 10,
 	lon: 10,
 	name: "San Diego"
+})
+
+searchButton.addEventListener("click", function() {
+
+ 
+
+  fetchCity(location);
+
+
+
 })
